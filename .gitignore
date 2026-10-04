@@ -6,7 +6,6 @@ minggu-01/dokumen/*Brian Polado*
 minggu-01/dokumen/*.docx
 
 # M03: repo latihan terpisah (nested git, jangan dilacak parent repo)
-minggu-03/lab-git/
 
 # OS / editor noise
 .DS_Store
