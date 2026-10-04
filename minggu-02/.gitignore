@@ -1,0 +1,7 @@
+# Generated log artifacts (JOB 2)
+app.log
+ringkasan-log.txt
+*.log
+
+# Health Watcher challenge output
+healthwatch.log

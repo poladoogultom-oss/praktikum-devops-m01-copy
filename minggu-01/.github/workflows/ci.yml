@@ -1,0 +1,56 @@
+# Bonus (di luar JOB 1-5): contoh pipeline CI yang menerapkan The Second Way (Feedback).
+# Setiap push/PR otomatis diverifikasi - tidak ada lagi "it works on my machine".
+name: CI - Sentra Digital Batam
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Static analysis (shellcheck)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Run shellcheck
+        run: shellcheck app-sentra/setup.sh app-sentra/teardown.sh
+
+  test:
+    name: Build & smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned dependencies
+        run: |
+          python -m venv .venv
+          . .venv/bin/activate
+          pip install -r app-sentra/requirements.txt
+      - name: Start application
+        env:
+          PORT: "5000"
+          BUILD_ID: "ci-${{ github.sha }}"
+        run: |
+          . .venv/bin/activate
+          python app-sentra/src/app.py &
+          echo $! > .app.pid
+      - name: Health check with retry
+        run: |
+          for i in $(seq 1 5); do
+            if curl -fsS http://127.0.0.1:5000/health; then
+              echo "healthy on attempt $i"; exit 0
+            fi
+            echo "attempt $i failed, retrying..."; sleep 2
+          done
+          echo "::error::health check failed"; exit 1
+      - name: Stop application
+        if: always()
+        run: kill "$(cat .app.pid)" 2>/dev/null || true

@@ -1,0 +1,12 @@
+# Force LF for shell scripts and config (no CRLF conversion on Windows checkout)
+*.sh         text eol=lf
+*.bash       text eol=lf
+hooks/*      text eol=lf
+.gitignore   text eol=lf
+.gitattributes text eol=lf
+
+# Markdown: allow CRLF on Windows so editors (Notepad) work, LF also acceptable
+*.md         text eol=lf
+
+# PDF / binary
+*.pdf        binary
