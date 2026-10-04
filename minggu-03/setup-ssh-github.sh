@@ -20,7 +20,7 @@
 #
 # Usage:
 #   bash setup-ssh-github.sh
-#   GITHUB_USERNAME=gandhi bash setup-ssh-github.sh   # skip prompt username
+#   GITHUB_USERNAME=poladoogultom-oss bash setup-ssh-github.sh   # skip prompt username
 
 set -euo pipefail
 
@@ -180,7 +180,7 @@ if [[ "$SSH_OK" == "1" ]]; then
     bold "[bonus] Migrasikan remote repo M01 ke SSH"
 
     if [[ -z "${GITHUB_USER:-}" ]]; then
-        read -r -p "    Username GitHub Anda (cth: gandhi-dev): " GITHUB_USER
+        read -r -p "    Username GitHub Anda (cth: poladoogultom-oss): " GITHUB_USER
     fi
 
     REPO_DIR="$HOME/praktikum-devops/minggu-01/app-sentra"

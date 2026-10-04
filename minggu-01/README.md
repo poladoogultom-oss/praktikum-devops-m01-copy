@@ -29,59 +29,11 @@ minggu-01/
 
 ---
 
-# Pembagian Peran (GJRRR & poladoogultom-oss)
-
-| Peran JOB | 🟦 Gandhi (kamu, `GJRRR`) | 🟥 Brian (teman, `poladoogultom-oss`) |
-|---|---|---|
-| **JOB 2 — Silo** | Operations (Ops) | Developer (Dev) |
-| **JOB 3 — VSM** | Kerjakan berdua | Kerjakan berdua |
-| **JOB 4 — Otomasi** | **Developer (Dev)** | **Operations (Ops)** |
-| **JOB 5 — SDLC & Postmortem** | Berdua | Berdua |
-
-> Aturan: di JOB 4 peran **ditukar**. Identitas git masing-masing:
-> - Gandhi: `user.name "Gandhi"`, `user.email "4332511050.Muhammad@students.polibatam.ac.id"`
-> - Brian: `user.name "Brian Polido Gultom"`, `user.email "4332511660@students.polibatam.ac.id"`
-
----
-
-# Setup Repository & Kolaborasi
-
-File paket ini saat ini ada di laptop Gandhi (Windows host). Alur ke Ubuntu:
-
-**1. Gandhi buat repo private di GitHub**
-- Login `GJRRR` → New repository → nama `praktikum-devops-m01` → ✅ Private → jangan centang README.
-
-**2. Gandhi push dari Windows host (Git Bash)**
-```bash
-cd "E:/devops/w1/drive-download-20260920T050145Z-1-001/praktikum-devops/minggu-01"
-git init
-git config user.name "Gandhi"
-git config user.email "4332511050.Muhammad@students.polibatam.ac.id"
-git add .
-git commit -m "feat: otomasi deployment manual -> setup.sh (Minggu 1)"
-git branch -M main
-git remote add origin https://github.com/GJRRR/praktikum-devops-m01.git
-git push -u origin main
-```
-> Password biasa tidak dipakai → pakai **Personal Access Token** (GitHub → Settings → Developer settings → PAT, scope `repo`).
-
-**3. Tambah collaborator**
-Repo → Settings → Collaborators → invite `poladoogultom-oss` + dosen `antoni@polibatam.ac.id` (harus punya akun GitHub).
-
-**4. Keduanya clone di Ubuntu**
-```bash
-git clone https://github.com/GJRRR/praktikum-devops-m01.git
-cd praktikum-devops-m01
-chmod +x 00-check-env.sh simulasi-serah-terima.sh app-sentra/setup.sh app-sentra/teardown.sh
-```
-
----
-
 # Alur Lengkap Berdua: JOB 1 → 5 + Challenge
 
 ## Fase 0 — Clone & persiapan (keduanya, di mesin masing-masing)
 ```bash
-git clone https://github.com/GJRRR/praktikum-devops-m01.git
+git clone https://github.com/poladoogultom-oss/praktikum-devops-m01-copy.git
 cd praktikum-devops-m01
 chmod +x 00-check-env.sh simulasi-serah-terima.sh app-sentra/setup.sh app-sentra/teardown.sh
 ```
